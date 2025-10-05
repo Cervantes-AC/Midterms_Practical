@@ -2,6 +2,7 @@ package com.example.midtermspractical;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean isUserInteracting = false; // only respond to user interaction
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +40,39 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        // Handle item selection
+        // Only trigger selection after user touches the spinner
+        spinner.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                isUserInteracting = true;
+            }
+            return false;
+        });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!isUserInteracting) return; // ignore auto-selection on startup
 
                 String selected = parent.getItemAtPosition(position).toString();
 
-                if (selected.equals("Basic Calculator")) {
-                    startActivity(new Intent(MainActivity.this, BasicCalculatorActivity.class));
-                } else if (selected.equals("Base Number Calculator")) {
-                    startActivity(new Intent(MainActivity.this, BaseCalculatorActivity.class));
-                } else if (selected.equals("Unit Converter")) {
-                    startActivity(new Intent(MainActivity.this, UnitConverterActivity.class));
+                switch (selected) {
+                    case "Basic Calculator":
+                        startActivity(new Intent(MainActivity.this, BasicCalculatorActivity.class));
+                        break;
+                    case "Base Number Calculator":
+                        startActivity(new Intent(MainActivity.this, BaseCalculatorActivity.class));
+                        break;
+                    case "Unit Converter":
+                        startActivity(new Intent(MainActivity.this, UnitConverterActivity.class));
+                        break;
                 }
+
+                isUserInteracting = false; // reset flag
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Nothing
+                // Do nothing
             }
         });
     }

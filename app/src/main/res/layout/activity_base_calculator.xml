@@ -1,26 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="#121212">
 
+    <!-- Title -->
     <TextView
-        android:text="Base Calculator"
-        android:textSize="22sp"
+        android:text="Base Number Converter"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFD700"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="24dp" />
 
-    <!-- Spinner -->
+    <!-- Main Spinner (Navigation) -->
     <Spinner
         android:id="@+id/Calculator_App"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#FFD700"
+        android:spinnerMode="dropdown" />
+
+    <!-- Input field -->
+    <EditText
+        android:id="@+id/inputNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter number"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:gravity="center"
+        android:background="#1E1E1E"
+        android:padding="14dp"
+        android:layout_marginBottom="24dp"
+        android:inputType="text"
+        android:textSize="18sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:clipToPadding="false"
+        android:scrollHorizontally="true" />
+
+    <!-- Base selection spinners -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <Spinner
+            android:id="@+id/fromSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFD700"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:text="-->"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/toSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFD700"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <!-- Convert Button -->
+    <Button
+        android:id="@+id/btnConvert"
+        android:text="Convert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#FFD700"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:padding="14dp"
+        android:textSize="18sp" />
+
+    <!-- Result display -->
+    <TextView
+        android:id="@+id/resultText"
+        android:text="Results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#1E1E1E"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="12dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>

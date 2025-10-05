@@ -12,25 +12,26 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Stack;
+
 public class BasicCalculatorActivity extends AppCompatActivity {
 
     private Spinner spinner;
     private EditText editText;
     private TextView resultText;
 
-    private Button addButton, subtractButton, multiplyButton, divideButton, equalButton, clearButton;
-    private Button num1Button, num2Button, num3Button, num4Button;
-    private Button num5Button, num6Button, num7Button, num8Button, num9Button, zeroButton, dotButton;
+    private Button addButton, subtractButton, multiplyButton, divideButton;
+    private Button equalButton, clearButton, deleteButton;
+    private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, dotButton;
+    private Button openParen, closeParen;
 
-    private double num1, num2;
-    private boolean isAddition, isSubtraction, isMultiplication, isDivision;
+    private boolean isFirstSelection = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_calculator);
 
-        // Spinner setup
         spinner = findViewById(R.id.Calculator_App);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -43,6 +44,10 @@ public class BasicCalculatorActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isFirstSelection) {
+                    isFirstSelection = false;
+                    return;
+                }
                 String selected = parent.getItemAtPosition(position).toString();
                 if (selected.equals("Base Number Calculator")) {
                     startActivity(new Intent(BasicCalculatorActivity.this, BaseCalculatorActivity.class));
@@ -55,7 +60,6 @@ public class BasicCalculatorActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // UI references
         editText = findViewById(R.id.editText2);
         resultText = findViewById(R.id.resultText);
 
@@ -65,89 +69,143 @@ public class BasicCalculatorActivity extends AppCompatActivity {
         divideButton = findViewById(R.id.div);
         equalButton = findViewById(R.id.submit);
         clearButton = findViewById(R.id.clear_text);
-
-        num1Button = findViewById(R.id.num1);
-        num2Button = findViewById(R.id.num2);
-        num3Button = findViewById(R.id.num3);
-        num4Button = findViewById(R.id.num4);
-        num5Button = findViewById(R.id.num5);
-        num6Button = findViewById(R.id.num6);
-        num7Button = findViewById(R.id.num7);
-        num8Button = findViewById(R.id.num8);
-        num9Button = findViewById(R.id.num9);
-        zeroButton = findViewById(R.id.zero);
         dotButton = findViewById(R.id.dot);
 
-        // Setup calculator logic
+        num0 = findViewById(R.id.zero);
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+        num3 = findViewById(R.id.num3);
+        num4 = findViewById(R.id.num4);
+        num5 = findViewById(R.id.num5);
+        num6 = findViewById(R.id.num6);
+        num7 = findViewById(R.id.num7);
+        num8 = findViewById(R.id.num8);
+        num9 = findViewById(R.id.num9);
+
+        deleteButton = findViewById(R.id.delete);
+        openParen = findViewById(R.id.open_paren);
+        closeParen = findViewById(R.id.close_paren);
+
         setupCalculatorLogic();
     }
 
     private void setupCalculatorLogic() {
-        addButton.setOnClickListener(v -> {
-            if (editText.getText().length() > 0) {
-                num1 = Double.parseDouble(editText.getText().toString());
-                isAddition = true;
-                editText.setText("");
-            }
-        });
+        View.OnClickListener listener = v -> {
+            Button b = (Button) v;
+            editText.append(b.getText());
+        };
 
-        subtractButton.setOnClickListener(v -> {
-            if (editText.getText().length() > 0) {
-                num1 = Double.parseDouble(editText.getText().toString());
-                isSubtraction = true;
-                editText.setText("");
-            }
-        });
+        // Numbers
+        num0.setOnClickListener(listener);
+        num1.setOnClickListener(listener);
+        num2.setOnClickListener(listener);
+        num3.setOnClickListener(listener);
+        num4.setOnClickListener(listener);
+        num5.setOnClickListener(listener);
+        num6.setOnClickListener(listener);
+        num7.setOnClickListener(listener);
+        num8.setOnClickListener(listener);
+        num9.setOnClickListener(listener);
+        dotButton.setOnClickListener(listener);
 
-        multiplyButton.setOnClickListener(v -> {
-            if (editText.getText().length() > 0) {
-                num1 = Double.parseDouble(editText.getText().toString());
-                isMultiplication = true;
-                editText.setText("");
-            }
-        });
+        // Operators
+        addButton.setOnClickListener(listener);
+        subtractButton.setOnClickListener(listener);
+        multiplyButton.setOnClickListener(v -> editText.append("*"));
+        divideButton.setOnClickListener(v -> editText.append("/"));
+        openParen.setOnClickListener(listener);
+        closeParen.setOnClickListener(listener);
 
-        divideButton.setOnClickListener(v -> {
-            if (editText.getText().length() > 0) {
-                num1 = Double.parseDouble(editText.getText().toString());
-                isDivision = true;
-                editText.setText("");
-            }
-        });
-
+        // Clear all
         clearButton.setOnClickListener(v -> {
             editText.setText("");
             resultText.setText("0");
-            isAddition = isSubtraction = isMultiplication = isDivision = false;
         });
 
-        equalButton.setOnClickListener(v -> {
-            if (editText.getText().length() > 0) {
-                num2 = Double.parseDouble(editText.getText().toString());
-                if (isAddition) resultText.setText(String.valueOf(num1 + num2));
-                else if (isSubtraction) resultText.setText(String.valueOf(num1 - num2));
-                else if (isMultiplication) resultText.setText(String.valueOf(num1 * num2));
-                else if (isDivision) {
-                    if (num2 != 0) resultText.setText(String.valueOf(num1 / num2));
-                    else resultText.setText("Error");
-                }
-                isAddition = isSubtraction = isMultiplication = isDivision = false;
+        // Delete last character
+        deleteButton.setOnClickListener(v -> {
+            String current = editText.getText().toString();
+            if (!current.isEmpty()) {
+                editText.setText(current.substring(0, current.length() - 1));
             }
         });
 
-        // Number buttons
-        num1Button.setOnClickListener(v -> editText.append("1"));
-        num2Button.setOnClickListener(v -> editText.append("2"));
-        num3Button.setOnClickListener(v -> editText.append("3"));
-        num4Button.setOnClickListener(v -> editText.append("4"));
-        num5Button.setOnClickListener(v -> editText.append("5"));
-        num6Button.setOnClickListener(v -> editText.append("6"));
-        num7Button.setOnClickListener(v -> editText.append("7"));
-        num8Button.setOnClickListener(v -> editText.append("8"));
-        num9Button.setOnClickListener(v -> editText.append("9"));
-        zeroButton.setOnClickListener(v -> editText.append("0"));
-        dotButton.setOnClickListener(v -> {
-            if (!editText.getText().toString().contains(".")) editText.append(".");
+        // Evaluate
+        equalButton.setOnClickListener(v -> {
+            String expression = editText.getText().toString();
+            try {
+                double result = evaluateExpression(expression);
+                if (result == Math.floor(result)) {
+                    resultText.setText(String.valueOf((long) result)); // whole number
+                } else {
+                    resultText.setText(String.valueOf(result)); // decimal
+                }
+            } catch (Exception e) {
+                resultText.setText("Error");
+            }
         });
+    }
+
+    private double evaluateExpression(String expression) {
+        return evaluatePostfix(infixToPostfix(expression));
+    }
+
+    private String infixToPostfix(String exp) {
+        StringBuilder result = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : exp.toCharArray()) {
+            if (Character.isDigit(c) || c == '.') {
+                result.append(c);
+            } else if (c == '(') {
+                stack.push(c);
+            } else if (c == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    result.append(' ').append(stack.pop());
+                }
+                stack.pop();
+            } else if ("+-*/".indexOf(c) != -1) {
+                result.append(' ');
+                while (!stack.isEmpty() && precedence(stack.peek()) >= precedence(c)) {
+                    result.append(stack.pop()).append(' ');
+                }
+                stack.push(c);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            result.append(' ').append(stack.pop());
+        }
+
+        return result.toString();
+    }
+
+    private double evaluatePostfix(String postfix) {
+        Stack<Double> stack = new Stack<>();
+        String[] tokens = postfix.split("\\s+");
+
+        for (String token : tokens) {
+            if (token.isEmpty()) continue;
+            if ("+-*/".contains(token)) {
+                double b = stack.pop();
+                double a = stack.pop();
+                switch (token) {
+                    case "+": stack.push(a + b); break;
+                    case "-": stack.push(a - b); break;
+                    case "*": stack.push(a * b); break;
+                    case "/": stack.push(a / b); break;
+                }
+            } else {
+                stack.push(Double.parseDouble(token));
+            }
+        }
+
+        return stack.pop();
+    }
+
+    private int precedence(char op) {
+        if (op == '+' || op == '-') return 1;
+        if (op == '*' || op == '/') return 2;
+        return 0;
     }
 }
