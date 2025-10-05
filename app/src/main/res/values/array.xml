@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Calculator_App">
+        <item>Basic Calculator</item>
+        <item>Base Number Calculator</item>
+        <item>Unit Converter</item>
+    </string-array>
+</resources>

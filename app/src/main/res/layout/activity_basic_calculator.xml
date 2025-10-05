@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basic Calculator"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Calculator App Spinner -->
+    <Spinner
+        android:id="@+id/Calculator_App"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:spinnerMode="dropdown" />
+
+    <!-- Input field -->
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter number"
+        android:textColor="@color/black"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- Result section -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Result: "
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="0"
+            android:textColor="@color/yellow"/>
+    </LinearLayout>
+
+    <!-- Calculator buttons -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <!-- Row 1 -->
+        <TableRow android:gravity="center">
+            <Button android:id="@+id/num1" android:text="1"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num2" android:text="2"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num3" android:text="3"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/add" android:text="+"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+        </TableRow>
+
+        <!-- Row 2 -->
+        <TableRow android:gravity="center">
+            <Button android:id="@+id/num4" android:text="4"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num5" android:text="5"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num6" android:text="6"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/sub" android:text="-"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+        </TableRow>
+
+        <!-- Row 3 -->
+        <TableRow android:gravity="center">
+            <Button android:id="@+id/num7" android:text="7"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num8" android:text="8"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/num9" android:text="9"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/mul" android:text="×"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+        </TableRow>
+
+        <!-- Row 4 -->
+        <TableRow android:gravity="center">
+            <Button android:id="@+id/dot" android:text="."
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/zero" android:text="0"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/yellow"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/clear_text" android:text="CE"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="16sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+            <Button android:id="@+id/div" android:text="÷"
+                android:layout_width="64dp" android:layout_height="64dp"
+                android:layout_margin="4dp" android:textSize="18sp"
+                android:textStyle="bold" android:backgroundTint="@color/light_grey"
+                android:textColor="@color/black"/>
+        </TableRow>
+    </TableLayout>
+
+    <!-- Submit / Equal -->
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/yellow"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Submit" />
+
+</LinearLayout>
