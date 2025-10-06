@@ -2,6 +2,7 @@ package com.example.midtermspractical;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaseCalculatorActivity extends AppCompatActivity {
 
     private EditText inputNumber;
-    private Spinner fromSpinner, toSpinner, mainSpinner;
-    private TextView resultText;
+    private Spinner fromSpinner, mainSpinner;
+    private TextView resultDecimal, resultBinary, resultOctal, resultHex;
     private Button convertBtn;
 
     private final String[] bases = {"Decimal", "Binary", "Octal", "Hexadecimal"};
@@ -29,17 +30,19 @@ public class BaseCalculatorActivity extends AppCompatActivity {
 
         inputNumber = findViewById(R.id.inputNumber);
         fromSpinner = findViewById(R.id.fromSpinner);
-        toSpinner = findViewById(R.id.toSpinner);
-        resultText = findViewById(R.id.resultText);
-        convertBtn = findViewById(R.id.btnConvert);
         mainSpinner = findViewById(R.id.Calculator_App);
+        convertBtn = findViewById(R.id.btnConvert);
 
-        // Setup base spinners
+        resultDecimal = findViewById(R.id.resultDecimal);
+        resultBinary = findViewById(R.id.resultBinary);
+        resultOctal = findViewById(R.id.resultOctal);
+        resultHex = findViewById(R.id.resultHex);
+
+        // Setup base spinner
         ArrayAdapter<String> baseAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, bases);
         baseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(baseAdapter);
-        toSpinner.setAdapter(baseAdapter);
 
         convertBtn.setOnClickListener(view -> convertNumber());
 
@@ -52,7 +55,7 @@ public class BaseCalculatorActivity extends AppCompatActivity {
         mainAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mainSpinner.setAdapter(mainAdapter);
 
-        // Set the spinner to show "Base Number Calculator" initially
+        // Set spinner to show "Base Number Calculator" initially
         mainSpinner.setSelection(getSpinnerPosition(mainSpinner, "Base Number Calculator"));
 
         // Detect user interaction
@@ -67,7 +70,6 @@ public class BaseCalculatorActivity extends AppCompatActivity {
                 if (!userSelect) return; // ignore programmatic selection
 
                 String selected = parent.getItemAtPosition(position).toString();
-
                 switch (selected) {
                     case "Base Number Calculator":
                         // already here
@@ -79,6 +81,7 @@ public class BaseCalculatorActivity extends AppCompatActivity {
                         startActivity(new Intent(BaseCalculatorActivity.this, UnitConverterActivity.class));
                         break;
                 }
+                userSelect = false; // reset flag
             }
 
             @Override
@@ -97,16 +100,19 @@ public class BaseCalculatorActivity extends AppCompatActivity {
         String input = inputNumber.getText().toString().trim();
 
         if (input.isEmpty()) {
-            resultText.setText("Please enter a number!");
+            resultDecimal.setText("-");
+            resultBinary.setText("-");
+            resultOctal.setText("-");
+            resultHex.setText("-");
             return;
         }
 
         String fromBase = fromSpinner.getSelectedItem().toString();
-        String toBase = toSpinner.getSelectedItem().toString();
 
         try {
             int decimalValue;
 
+            // Convert input to decimal
             switch (fromBase) {
                 case "Binary":
                     decimalValue = Integer.parseInt(input, 2);
@@ -121,25 +127,17 @@ public class BaseCalculatorActivity extends AppCompatActivity {
                     decimalValue = Integer.parseInt(input);
             }
 
-            String result;
-            switch (toBase) {
-                case "Binary":
-                    result = Integer.toBinaryString(decimalValue);
-                    break;
-                case "Octal":
-                    result = Integer.toOctalString(decimalValue);
-                    break;
-                case "Hexadecimal":
-                    result = Integer.toHexString(decimalValue).toUpperCase();
-                    break;
-                default:
-                    result = String.valueOf(decimalValue);
-            }
-
-            resultText.setText("Result: " + result);
+            // Update all result TextViews
+            resultDecimal.setText(String.valueOf(decimalValue));
+            resultBinary.setText(Integer.toBinaryString(decimalValue));
+            resultOctal.setText(Integer.toOctalString(decimalValue));
+            resultHex.setText(Integer.toHexString(decimalValue).toUpperCase());
 
         } catch (NumberFormatException e) {
-            resultText.setText("Invalid input for " + fromBase);
+            resultDecimal.setText("Invalid");
+            resultBinary.setText("Invalid");
+            resultOctal.setText("Invalid");
+            resultHex.setText("Invalid");
         }
     }
 }

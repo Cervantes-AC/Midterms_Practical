@@ -1,111 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="#121212"
+    android:padding="24dp">
 
-    <!-- Title -->
-    <TextView
-        android:text="Base Number Converter"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#FFD700"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Main Spinner (Navigation) -->
-    <Spinner
-        android:id="@+id/Calculator_App"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#FFD700"
-        android:spinnerMode="dropdown" />
-
-    <!-- Input field -->
-    <EditText
-        android:id="@+id/inputNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter number"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#AAAAAA"
-        android:gravity="center"
-        android:background="#1E1E1E"
-        android:padding="14dp"
-        android:layout_marginBottom="24dp"
-        android:inputType="text"
-        android:textSize="18sp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:clipToPadding="false"
-        android:scrollHorizontally="true" />
-
-    <!-- Base selection spinners -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp">
+        android:gravity="center_horizontal">
 
-        <Spinner
-            android:id="@+id/fromSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#FFD700"
-            android:spinnerMode="dropdown" />
-
+        <!-- Title -->
         <TextView
-            android:text="-->"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:layout_marginHorizontal="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/toSpinner"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:text="Base Number Converter"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#FFD700"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Main Navigation Spinner -->
+        <Spinner
+            android:id="@+id/Calculator_App"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="#FFD700"
+            android:minHeight="48dp"
             android:spinnerMode="dropdown" />
+
+        <!-- Input Field -->
+        <EditText
+            android:id="@+id/inputNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter number"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:gravity="center"
+            android:background="#1E1E1E"
+            android:padding="14dp"
+            android:layout_marginBottom="24dp"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:scrollHorizontally="true"
+            android:clipToPadding="false" />
+
+        <!-- Base Selection Spinner -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp">
+
+            <Spinner
+                android:id="@+id/fromSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FFD700"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Base"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Results Card -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E1E"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:clipToPadding="false"
+            android:elevation="2dp">
+
+            <!-- Decimal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Decimal: "
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/resultDecimal"
+                    android:text="-"
+                    android:textColor="#FFD700"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Binary -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Binary: "
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/resultBinary"
+                    android:text="-"
+                    android:textColor="#FFD700"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Octal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Octal: "
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/resultOctal"
+                    android:text="-"
+                    android:textColor="#FFD700"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Hexadecimal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Hexadecimal: "
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/resultHex"
+                    android:text="-"
+                    android:textColor="#FFD700"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Convert Button -->
+        <Button
+            android:id="@+id/btnConvert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convert"
+            android:backgroundTint="#FFD700"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:padding="14dp"
+            android:textSize="16sp"
+            android:elevation="2dp" />
+
     </LinearLayout>
-
-    <!-- Convert Button -->
-    <Button
-        android:id="@+id/btnConvert"
-        android:text="Convert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#FFD700"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:padding="14dp"
-        android:textSize="18sp" />
-
-    <!-- Result display -->
-    <TextView
-        android:id="@+id/resultText"
-        android:text="Results"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:background="#1E1E1E"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="12dp"
-        android:clipToPadding="false" />
-
-</LinearLayout>
+</ScrollView>

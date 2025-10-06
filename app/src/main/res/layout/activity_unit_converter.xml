@@ -1,6 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unit Converter"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFD700"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Category Spinners -->
+        <Spinner
+            android:id="@+id/switchUI"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#FFD700"
+            android:popupBackground="#1E1E1E" />
+
+        <Spinner
+            android:id="@+id/switchcategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFD700"
+            android:popupBackground="#1E1E1E" />
+
+        <!-- Unit Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <Spinner
+                android:id="@+id/switchunit1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="#FFD700"
+                android:popupBackground="#1E1E1E" />
+
+            <Spinner
+                android:id="@+id/switchunit2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FFD700"
+                android:popupBackground="#1E1E1E" />
+        </LinearLayout>
+
+        <!-- Input -->
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter the Value"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:background="#1E1E1E"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Result Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/unitconversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unit:"
+                android:textColor="#FFD700"
+                android:textSize="18sp"
+                android:layout_marginEnd="4dp" />
+
+            <TextView
+                android:id="@+id/Unittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:text="" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:shrinkColumns="*"
+            android:layout_marginBottom="20dp">
+
+            <!-- Control Buttons -->
+            <TableRow android:gravity="center">
+                <Button
+                    android:id="@+id/switchbutton"
+                    android:text="⥤"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:backgroundTint="#333333"
+                    android:textColor="#FFD700" />
+
+                <Button
+                    android:id="@+id/backspace"
+                    android:text="⌫"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:backgroundTint="#333333"
+                    android:textColor="#FFD700" />
+
+                <Button
+                    android:id="@+id/clear_text"
+                    android:text="CE"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:backgroundTint="#333333"
+                    android:textColor="#FFD700" />
+            </TableRow>
+
+            <!-- Numeric Buttons -->
+            <TableRow android:gravity="center">
+                <Button android:id="@+id/num1" android:text="1" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num2" android:text="2" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num3" android:text="3" style="@style/CalcButtonStyle" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+                <Button android:id="@+id/num4" android:text="4" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num5" android:text="5" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num6" android:text="6" style="@style/CalcButtonStyle" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+                <Button android:id="@+id/num7" android:text="7" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num8" android:text="8" style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/num9" android:text="9" style="@style/CalcButtonStyle" />
+            </TableRow>
+
+            <TableRow android:gravity="center">
+                <Button android:id="@+id/dot" android:text="." style="@style/CalcButtonStyle" />
+                <Button android:id="@+id/zero" android:text="0" style="@style/CalcButtonStyle" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Submit -->
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="#FFD700"
+            android:textColor="#121212"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp" />
+
+    </LinearLayout>
+</ScrollView>
